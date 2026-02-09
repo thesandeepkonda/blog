@@ -20,3 +20,18 @@ resource "aws_ecs_task_definition" "blog_task" {
     }
   ])
 }
+
+resource "aws_ecs_service" "blog_service" {
+  name            = "personalblog-service"
+  cluster         = aws_ecs_cluster.blog_cluster.id
+  task_definition = aws_ecs_task_definition.blog_task.arn
+  desired_count   = 1
+  launch_type     = "FARGATE"
+
+  network_configuration {
+    subnets         = ["your-subnet"]
+    security_groups = ["your-sg"]
+    assign_public_ip = true
+  }
+}
+
