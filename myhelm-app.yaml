@@ -8,19 +8,9 @@ spec:
   project: default
 
   source:
-    repoURL: apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: myhelm-dev
-  namespace: argocd
-
-spec:
-  project: default
-
-  source:
     repoURL: https://github.com/thesandeepkonda/blog.git
     targetRevision: main
-    path: myhelm
+    path: helm-practice/myhelm
 
   destination:
     server: https://kubernetes.default.svc
@@ -30,16 +20,3 @@ spec:
     automated:
       prune: true
       selfHeal: true
-
-    targetRevision: main
-    path: myhelm
-
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: default
-
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-
